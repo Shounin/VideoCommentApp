@@ -9,16 +9,28 @@
 <iframe width="560" height="315" src="//www.youtube.com/embed/OgGbNJdMaTY" frameborder="0" allowfullscreen></iframe>
 
 <script type="text/html" id="template">
-    <div data-content="Username"></div>
-    <div data-content="CommentDate"></div>
-    <div data-content="CommentText"></div>
+    <li class="list-group-item">
+        <p>
+            <span class="glyphicon glyphicon-user"></span>
+            <span class="text-primary"data-content="Username"></span>
+            <span data-content="CommentText"></span>
+        </p>
+        <p>
+            <span class="text-muted" data-content="CommentDate"></span>
+            <a class="like-comment" href="#">Like <span class="glyphicon glyphicon-thumbs-up"></span></a>
+        </p>
+        <!--<ul class="list-unstyled">
+            <li>Patrekur liked this</li>
+            <li>Siggi liked this</li>
+        </ul>-->
+    </li>
 </script>
 
-<ul class="list-group" style="max-width: 560px;">
+<ul class="list-group" id="cList" style="max-width: 560px;">
     @foreach (var item in Model)
     {
 
-        <li class="list-group-item" id="cList">
+        <li class="list-group-item">
             <p>
                 <span class="glyphicon glyphicon-user"></span>
                 <span class="text-primary">@Html.DisplayFor(modelItem => item.Username)</span>
@@ -36,19 +48,19 @@
     }
     <li class="list-group-item">
         @*@using (Html.BeginForm())
-        {
-            <div class="form-horizontal">
-                <label class="sr-only" for="CommentText">Comment</label>
-                <textarea class="form-control" rows="3" id="CommentText" name="CommentText"></textarea>
-                <button type="submit" class="btn btn-primary">Send</button>
-            </div>
-            @Html.ValidationSummary(false)
-        }*@
+            {
+                <div class="form-horizontal">
+                    <label class="sr-only" for="CommentText">Comment</label>
+                    <textarea class="form-control" rows="3" id="CommentText" name="CommentText"></textarea>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+                @Html.ValidationSummary(false)
+            }*@
         <form>
             <fieldset>
                 <legend>Add a comment</legend>
-                <input type="text" id="comment" name="comment"/>
-                <input type="button" id="btn-save" value="Save"/>
+                <input type="text" id="comment" name="comment" />
+                <input type="button" id="btn-save" value="Save" />
             </fieldset>
         </form>
     </li>

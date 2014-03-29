@@ -147,7 +147,7 @@
         if (queue[template]) {
             queue[template].push({ data: data, selection: selection, settings: settings });
         } else {
-            queue[template] = [{ data: data, selection: selection, settings: settings }];
+            queue[template] = [{ data: data, selection: selection, settings: settings}];
         }
     }
 
