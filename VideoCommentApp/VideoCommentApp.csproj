@@ -167,6 +167,7 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\CommentRepository.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Like.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

@@ -56,22 +56,46 @@ namespace VideoCommentApp.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult GetComments()
         {
             var model = CommentRepository.Instance.GetComments();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            var fiddledmodel = from c in model 
+                 select new { 
+                 CommentDate=c.CommentDate.ToShortDateString(), 
+                 ID = c.ID, 
+                 CommentText=c.CommentText, 
+                 Username=c.Username }; 
+            return Json(fiddledmodel, JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         public ActionResult Create(Comment com)
         {
-            com.CommentDate = DateTime.Now;
-            var model = CommentRepository.Instance.GetComments();
-            foreach (var item in model)
+            if (!String.IsNullOrEmpty(com.CommentText))
             {
-                com.ID++;
+                String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+                if (!String.IsNullOrEmpty(strUser))
+                {
+                    int slashPos = strUser.IndexOf("\\");
+                    if (slashPos != -1)
+                    {
+                        strUser = strUser.Substring(slashPos + 1);
+                    }
+                    com.Username = strUser;
+
+                    CommentRepository.Instance.AddComment(com);
+                }
+                else
+                {
+                    com.Username = "Unknown user";
+                }
+                return Json(com, JsonRequestBehavior.AllowGet);
             }
-            CommentRepository.Instance.AddComment(com);
-            return Json(com, JsonRequestBehavior.AllowGet);
+            else
+            {
+                ModelState.AddModelError("CommentText", "Comment text cannot be empty!");
+                return Index();
+            }
         }
 
         public ActionResult Contact()
@@ -79,6 +103,12 @@ namespace VideoCommentApp.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        public ActionResult ChangeLikes(String com)
+        {
+            var comment = CommentRepository.Instance.GetComments().Where(x => x.Username == com);
+            comment.ChangeLikes(com);
+            return Json(com, JsonRequestBehavior.AllowGet);
         }
     }
 }

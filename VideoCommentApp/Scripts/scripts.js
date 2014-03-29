@@ -1,11 +1,24 @@
 ﻿$(document).ready(function () {
-
+    getComments();
     $("#btn-save").click(function () {
-        var Comment = { "ID": 1, "Username": "rassapi", "CommentText": $("#comment").val(), "CommentDate": 0 }
+        var Comment = { "ID": 1, "Username": "", "CommentText": $("#Comment").val(), "CommentDate": 0 }
         $.post("/Home/Create", Comment, function (data) {
-            data.CommentDate = new Date(parseInt(data.CommentDate.substr(6)));
-            $("#cList").loadTemplate($("#template"), data, {append: true});
-        });
+            $("#cList li:not(:last)").remove();
+            $("#Comment").val("");
+            getComments();
+        });    
     });
-
 });
+
+function getComments() {
+    $.ajax({
+        type: "GET",
+        contentType: "application/json; charset=utf8",
+        url: "/Home/GetComments/",
+        data: "{}",
+        dataType: "json",
+        success: function (data) {
+            $("#cList").loadTemplate($("#template"), data, { prepend: true });
+        },
+    });
+};
