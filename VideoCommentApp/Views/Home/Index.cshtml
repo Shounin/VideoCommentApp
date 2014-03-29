@@ -8,12 +8,17 @@
 
 <iframe width="560" height="315" src="//www.youtube.com/embed/OgGbNJdMaTY" frameborder="0" allowfullscreen></iframe>
 
+<script type="text/html" id="template">
+    <div data-content="Username"></div>
+    <div data-content="CommentDate"></div>
+    <div data-content="CommentText"></div>
+</script>
 
 <ul class="list-group" style="max-width: 560px;">
     @foreach (var item in Model)
     {
 
-        <li class="list-group-item">
+        <li class="list-group-item" id="cList">
             <p>
                 <span class="glyphicon glyphicon-user"></span>
                 <span class="text-primary">@Html.DisplayFor(modelItem => item.Username)</span>

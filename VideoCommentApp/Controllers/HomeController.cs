@@ -55,7 +55,13 @@ namespace VideoCommentApp.Controllers
 
             return View();
         }
-
+        [HttpGet]
+        public ActionResult Create()
+        {
+            var model = CommentRepository.Instance.GetComments();
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
         public ActionResult Create(Comment com)
         {
             com.CommentDate = DateTime.Now;
