@@ -30,7 +30,7 @@
         </li>
     }
     <li class="list-group-item">
-        @using (Html.BeginForm())
+        @*@using (Html.BeginForm())
         {
             <div class="form-horizontal">
                 <label class="sr-only" for="CommentText">Comment</label>
@@ -38,6 +38,13 @@
                 <button type="submit" class="btn btn-primary">Send</button>
             </div>
             @Html.ValidationSummary(false)
-        }
+        }*@
+        <form>
+            <fieldset>
+                <legend>Add a comment</legend>
+                <input type="text" id="comment" name="comment"/>
+                <input type="button" id="btn-save" value="Save"/>
+            </fieldset>
+        </form>
     </li>
 </ul>

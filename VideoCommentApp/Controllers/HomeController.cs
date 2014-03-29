@@ -56,6 +56,18 @@ namespace VideoCommentApp.Controllers
             return View();
         }
 
+        public ActionResult Create(Comment com)
+        {
+            com.CommentDate = DateTime.Now;
+            var model = CommentRepository.Instance.GetComments();
+            foreach (var item in model)
+            {
+                com.ID++;
+            }
+            CommentRepository.Instance.AddComment(com);
+            return Json(com, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
