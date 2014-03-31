@@ -76,7 +76,7 @@ namespace VideoCommentApp.Controllers
             var fiddledmodel = from c in model
                                select new
                                {
-                                   CommentDate = c.CommentDate.ToShortDateString(),
+                                   CommentDate = c.CommentDate.ToLongDateString() + " at " +  c.CommentDate.ToShortTimeString(),
                                    ID = c.ID,
                                    CommentText = c.CommentText,
                                    Username = c.Username,

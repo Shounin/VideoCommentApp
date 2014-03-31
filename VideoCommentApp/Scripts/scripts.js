@@ -1,6 +1,16 @@
 ﻿$(document).ready(function () {
     getComments();
     $("#btn-save").click(function () {
+        if ( $.trim( $("#Comment").val() ) == '' ){
+            $(".com-text").prop("class", "form-control com-text has-error");
+            $(".com-text").prop("placeholder", "You cannot post empty comments!");
+            $("#Comment").val("");
+            return;
+        }
+        else if ($(".com-text").prop("class").length > "form-control com-text".length) {
+            $(".com-text").prop("class", "form-control com-text")
+            $(".com-text").prop("placeholder", "Your comment goes here..");
+        }
         var Comment = { "ID": 1, "Username": "", "CommentText": $("#Comment").val(), "CommentDate": 0, "LState": "Like" }
         $.post("/Home/Create", Comment, function (data) {
             $("#cList li:not(:last)").remove();

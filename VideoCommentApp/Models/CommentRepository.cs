@@ -27,7 +27,7 @@ namespace VideoBlogApplication.Models
             this.m_comments = new List<Comment>();
             Comment commment1 = new Comment { ID = 1, CommentText = "Great Video!", CommentDate = new DateTime(2014, 3, 1, 12, 30, 00), Username = "Patrekur", Likes = new List<Like>() };
             Comment commment2 = new Comment { ID = 2, CommentText = "Amazing content!", CommentDate = new DateTime(2014, 3, 5, 12, 30, 00), Username = "Siggi", Likes = new List<Like>() };
-            Like temp = new Like { Username = "Rassapi", ID = 1 };
+            Like temp = new Like { Username = "Alan Turing", ID = 1 };
             commment1.ChangeLikes(temp);
             this.m_comments.Add(commment1);
             this.m_comments.Add(commment2);
