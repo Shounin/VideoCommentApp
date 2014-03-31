@@ -27,22 +27,7 @@ namespace VideoCommentApp.Controllers
                 Comment c = new Comment();
 
                 c.CommentText = strComment;
-                String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-                if (!String.IsNullOrEmpty(strUser))
-                {
-                    int slashPos = strUser.IndexOf("\\");
-                    if (slashPos != -1)
-                    {
-                        strUser = strUser.Substring(slashPos + 1);
-                    }
-                    c.Username = strUser;
-
-                    CommentRepository.Instance.AddComment(c);
-                }
-                else
-                {
-                    c.Username = "Unknown user";
-                }
+				String strUser = Username();
                 return RedirectToAction("Index");
             }
             else
@@ -62,19 +47,7 @@ namespace VideoCommentApp.Controllers
         //this fellow gets used a lot.  it gets the comment list, modifies some items in it and returns it as a json object
         public ActionResult GetComments()
         {
-            String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-            if (!String.IsNullOrEmpty(strUser))
-            {
-                int slashPos = strUser.IndexOf("\\");
-                if (slashPos != -1)
-                {
-                    strUser = strUser.Substring(slashPos + 1);
-                }
-            }
-            else
-            {
-                strUser = "Unknown user";
-            }
+			string strUser = Username();
             var model = CommentRepository.Instance.GetComments();
             var fiddledmodel = from c in model
                                select new
@@ -94,22 +67,8 @@ namespace VideoCommentApp.Controllers
         {
             if (!String.IsNullOrEmpty(com.CommentText))
             {
-                String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-                if (!String.IsNullOrEmpty(strUser))
-                {
-                    int slashPos = strUser.IndexOf("\\");
-                    if (slashPos != -1)
-                    {
-                        strUser = strUser.Substring(slashPos + 1);
-                    }
-                    com.Username = strUser;
-
-                    CommentRepository.Instance.AddComment(com);
-                }
-                else
-                {
-                    com.Username = "Unknown user";
-                }
+				com.Username = Username();
+				CommentRepository.Instance.AddComment(com);
                 return Json(com, JsonRequestBehavior.AllowGet);
             }
             else
@@ -129,23 +88,28 @@ namespace VideoCommentApp.Controllers
         //Calls the likemanip function with the aquired username.
         public ActionResult ChangeLikes(Like li)
         {
-            String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-            if (!String.IsNullOrEmpty(strUser))
-            {
-                int slashPos = strUser.IndexOf("\\");
-                if (slashPos != -1)
-                {
-                    strUser = strUser.Substring(slashPos + 1);
-                }
-                li.Username = strUser;
-            }
-            else
-            {
-                li.Username = "Unknown user";
-            }
+			li.Username = Username();
             CommentRepository.Instance.LikeManip(li);
             //Not sure why i have to do this but it was the only way i could figure out for it to work =<
             return Json(li, JsonRequestBehavior.AllowGet);
         }
+
+		public string Username()
+		{
+			String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+			if (!String.IsNullOrEmpty(strUser))
+			{
+				int slashPos = strUser.IndexOf("\\");
+				if (slashPos != -1)
+				{
+					strUser = strUser.Substring(slashPos + 1);
+				}
+			}
+			else
+			{
+				strUser = "Unknown user";
+			}
+			return strUser;
+		}
     }
 }
