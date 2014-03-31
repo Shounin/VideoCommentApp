@@ -17,7 +17,7 @@
         </p>
         <p>
             <span class="text-muted" data-content="CommentDate"></span>
-            <button type="button" class="like-comment btn  btn-xs" data-template-bind='[{"attribute":  "data-id", "value": "ID"}]'><span class="button-text">Like</span> <span class="glyphicon glyphicon-thumbs-up"></span></button>
+            <button type="button" class="like-comment btn  btn-xs" data-template-bind='[{"attribute":  "data-id", "value": "ID"}]'><span class="button-text" data-content="LStatus"></span> <span class="glyphicon glyphicon-thumbs-up"></span></button>
         </p>
         <ul class="list-unstyled">
             <li data-template-bind='{"attribute": "content", "value": "Likes", "formatter": "nestedTemplateFormatter", "formatOptions": {"parentElement": "ul", "template": "#templateThis"}}'></li>

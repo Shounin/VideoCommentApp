@@ -13,6 +13,7 @@ namespace VideoBlogApplication.Models
         public String CommentText { get; set; }
         public DateTime CommentDate { get; set; }
         public List<Like> Likes { get; set; }
+        public string LStatus { get; set; }
         public void ChangeLikes(Like li)
         {
             foreach (var item in Likes)
@@ -24,6 +25,17 @@ namespace VideoBlogApplication.Models
                 }
             }
             Likes.Add(li);
+        }
+        public string HasLiked(string user)
+        {
+            foreach (var item in Likes)
+            {
+                if (item.Username == user)
+                {
+                    return "Unlike";
+                }
+            }
+            return "Like";
         }
     }
 }

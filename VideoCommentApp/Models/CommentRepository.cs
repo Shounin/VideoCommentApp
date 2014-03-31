@@ -59,5 +59,11 @@ namespace VideoBlogApplication.Models
             var result = m_comments.Find(p => p.ID == li.ID);
             result.ChangeLikes(li);
         }
+
+        public string HasLiked(string user, int uID)
+        {
+            var result = m_comments.Find(p => p.ID == uID);
+            return result.HasLiked(user);
+        }
     }
 }
