@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<VideoBlogApplication.Models.Comment>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Like this video!";
 }
 
-<h2>Video blog application</h2>
+<h2 class="header">Video blog application</h2>
 
 <iframe width="560" height="315" src="//www.youtube.com/embed/OgGbNJdMaTY" frameborder="0" allowfullscreen></iframe>
 
@@ -39,7 +39,7 @@
             <label class="sr-only" for="CommentText">Comment</label>
             <textarea class="form-control com-text" placeholder="Your comment goes here.." rows="3" id="Comment" name="Comment"></textarea>
             @*<input type="text" id="Comment" name="comment" />*@
-            <input type="button" class="btn btn-primary" id="btn-save" value="Comment" />
+            <input type="button" class="btn btn-primary btn-com" id="btn-save" value="Comment" />
         </form>
     </li>
 </ul>
