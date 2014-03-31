@@ -17,7 +17,8 @@
         </p>
         <p>
             <span class="text-muted" data-content="CommentDate"></span>
-            <a class="like-comment" href="#">Like <span class="glyphicon glyphicon-thumbs-up"></span></a>
+            @*<a class="like-comment" data-template-bind='[{"attribute":  "data-id", "value": "ID"}]'>Like</a><span class="glyphicon glyphicon-thumbs-up"></span>*@
+            <button type="button" class="like-comment btn  btn-xs" data-template-bind='[{"attribute":  "data-id", "value": "ID"}]'><span class="button-text">Like</span> <span class="glyphicon glyphicon-thumbs-up"></span></button>
         </p>
         <!--<ul class="list-unstyled">
             <li>Patrekur liked this</li>

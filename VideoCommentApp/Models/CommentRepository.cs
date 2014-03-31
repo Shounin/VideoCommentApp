@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using VideoCommentApp.Models;
 
 namespace VideoBlogApplication.Models
 {
@@ -49,6 +50,12 @@ namespace VideoBlogApplication.Models
             c.ID = newID;
             c.CommentDate = DateTime.Now;
             m_comments.Add(c);
+        }
+        public void LikeManip(Like li)
+        {
+            var result = from c in m_comments
+                         where c.ID == li.ID
+                         select c;
         }
     }
 }

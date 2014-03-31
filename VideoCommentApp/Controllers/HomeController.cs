@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using VideoBlogApplication.Models;
+using VideoCommentApp.Models;
 
 namespace VideoCommentApp.Controllers
 {
@@ -104,11 +105,12 @@ namespace VideoCommentApp.Controllers
 
             return View();
         }
-        public ActionResult ChangeLikes(String com)
+        [HttpPost]
+        public ActionResult ChangeLikes(Like li)
         {
-            var comment = CommentRepository.Instance.GetComments().Where(x => x.Username == com);
-            comment.ChangeLikes(com);
-            return Json(com, JsonRequestBehavior.AllowGet);
+            
+            //comment.ChangeLikes(com);
+            return Json(li, JsonRequestBehavior.AllowGet);
         }
     }
 }

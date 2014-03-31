@@ -8,6 +8,22 @@
             getComments();
         });    
     });
+
+    $('#cList').on('click', '.like-comment', function ()  {
+        var elem = $(this);
+        var Like = { "ID": elem.data('id'), "Username": ""}
+        $.post("/Home/ChangeLikes", Comment, function (data) {
+            $("#cList li:not(:last)").remove();
+            getComments();
+        });
+        if ($(".button-text", this).text() == "Like") {
+            $(".button-text", this).text("Unlike");
+        }
+        else {
+            $(".button-text", this).text("Like");
+        }
+        
+    });
 });
 
 function getComments() {

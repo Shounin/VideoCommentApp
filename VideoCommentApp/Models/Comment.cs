@@ -15,7 +15,7 @@ namespace VideoBlogApplication.Models
         public List<Like> Likes { get; set; }
         public void ChangeLikes(String Username)
         {
-            Like temp = new Like(Username);
+            Like temp = new Like(Username, ID);
             if(Likes.Contains(temp))
             {
                 Likes.Remove(temp);
