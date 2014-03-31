@@ -7,12 +7,9 @@ namespace VideoCommentApp.Models
 {
     public class Like
     {
+        //The ID of the comment its attached to
         public int ID { get; set; }
+        //The user that gave it
         public String Username { get; set; }
-        //public Like( String Username, int ID)
-        //{
-        //    this.Username = Username;
-        //    this.ID = ID;
-        //}
     }
 }

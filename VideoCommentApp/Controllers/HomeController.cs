@@ -10,6 +10,7 @@ namespace VideoCommentApp.Controllers
 {
     public class HomeController : Controller
     {
+
         public ActionResult Index()
         {
             var model = CommentRepository.Instance.GetComments();
@@ -17,6 +18,7 @@ namespace VideoCommentApp.Controllers
         }
 
         [HttpPost]
+        //We decided this thing was made of lies, we then tore it appart and used the useful bits.
         public ActionResult Index(FormCollection formData)
         {
             String strComment = formData["CommentText"];
@@ -57,6 +59,7 @@ namespace VideoCommentApp.Controllers
             return View();
         }
         [HttpGet]
+        //this fellow gets used a lot.  it gets the comment list, modifies some items in it and returns it as a json object
         public ActionResult GetComments()
         {
             String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
@@ -111,7 +114,7 @@ namespace VideoCommentApp.Controllers
             }
             else
             {
-                ModelState.AddModelError("CommentText", "Comment text cannot be empty!");
+                ModelState.AddModelError("CommentText", "Comment text cannot be empty!"); //I don't think this ever gets called but you can't be too safe
                 return Index();
             }
         }
@@ -123,6 +126,7 @@ namespace VideoCommentApp.Controllers
             return View();
         }
         [HttpPost]
+        //Calls the likemanip function with the aquired username.
         public ActionResult ChangeLikes(Like li)
         {
             String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
@@ -140,7 +144,7 @@ namespace VideoCommentApp.Controllers
                 li.Username = "Unknown user";
             }
             CommentRepository.Instance.LikeManip(li);
-            //comment.ChangeLikes(com);
+            //Not sure why i have to do this but it was the only way i could figure out for it to work =<
             return Json(li, JsonRequestBehavior.AllowGet);
         }
     }
