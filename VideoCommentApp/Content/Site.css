@@ -40,3 +40,8 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+.like-text {
+    font-size: 11px;
+    color: #428bca;
+}
