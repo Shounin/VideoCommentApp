@@ -13,17 +13,17 @@ namespace VideoBlogApplication.Models
         public String CommentText { get; set; }
         public DateTime CommentDate { get; set; }
         public List<Like> Likes { get; set; }
-        public void ChangeLikes(String Username)
+        public void ChangeLikes(Like li)
         {
-            Like temp = new Like(Username, ID);
-            if(Likes.Contains(temp))
+            foreach (var item in Likes)
             {
-                Likes.Remove(temp);
+                if (item.Username == li.Username)
+                {
+                    Likes.Remove(item);
+                    return;
+                }
             }
-            else
-            {
-                Likes.Add(temp);
-            }
+            Likes.Add(li);
         }
     }
 }

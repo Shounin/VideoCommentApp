@@ -25,11 +25,13 @@ namespace VideoBlogApplication.Models
         private CommentRepository()
         {
             this.m_comments = new List<Comment>();
-            Comment commment1 = new Comment { ID = 1, CommentText = "Great Video!", CommentDate = new DateTime(2014, 3, 1, 12, 30, 00), Username = "Patrekur" };
-            Comment commment2 = new Comment { ID = 2, CommentText = "Amazing content!", CommentDate = new DateTime(2014, 3, 5, 12, 30, 00), Username = "Siggi" };
+            Comment commment1 = new Comment { ID = 1, CommentText = "Great Video!", CommentDate = new DateTime(2014, 3, 1, 12, 30, 00), Username = "Patrekur", Likes = new List<Like>() };
+            Comment commment2 = new Comment { ID = 2, CommentText = "Amazing content!", CommentDate = new DateTime(2014, 3, 5, 12, 30, 00), Username = "Siggi", Likes = new List<Like>() };
+            Like temp = new Like { Username = "Rassapi", ID = 1 };
+            commment1.ChangeLikes(temp);
             this.m_comments.Add(commment1);
             this.m_comments.Add(commment2);
-
+            
         }
 
         public IEnumerable<Comment> GetComments()
@@ -49,13 +51,13 @@ namespace VideoBlogApplication.Models
             }
             c.ID = newID;
             c.CommentDate = DateTime.Now;
+            c.Likes = new List<Like>();
             m_comments.Add(c);
         }
         public void LikeManip(Like li)
         {
-            var result = from c in m_comments
-                         where c.ID == li.ID
-                         select c;
+            var result = m_comments.Find(p => p.ID == li.ID);
+            result.ChangeLikes(li);
         }
     }
 }

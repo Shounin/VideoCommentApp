@@ -65,7 +65,8 @@ namespace VideoCommentApp.Controllers
                  CommentDate=c.CommentDate.ToShortDateString(), 
                  ID = c.ID, 
                  CommentText=c.CommentText, 
-                 Username=c.Username }; 
+                 Username=c.Username,
+                 Likes = c.Likes};
             return Json(fiddledmodel, JsonRequestBehavior.AllowGet);
         }
 
@@ -108,7 +109,21 @@ namespace VideoCommentApp.Controllers
         [HttpPost]
         public ActionResult ChangeLikes(Like li)
         {
-            
+            String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            if (!String.IsNullOrEmpty(strUser))
+            {
+                int slashPos = strUser.IndexOf("\\");
+                if (slashPos != -1)
+                {
+                    strUser = strUser.Substring(slashPos + 1);
+                }
+                li.Username = strUser;
+            }
+            else
+            {
+                li.Username = "Unknown user";
+            }
+            CommentRepository.Instance.LikeManip(li);
             //comment.ChangeLikes(com);
             return Json(li, JsonRequestBehavior.AllowGet);
         }

@@ -11,18 +11,17 @@
 
     $('#cList').on('click', '.like-comment', function ()  {
         var elem = $(this);
-        var Like = { "ID": elem.data('id'), "Username": ""}
-        $.post("/Home/ChangeLikes", Comment, function (data) {
+        var Like = { "ID": elem.data('id'), "Username": "" }
+        //if ($(".button-text", this).text() == "Like") {
+        //    $(".button-text", this).text("Unlike");
+        //}
+        //else {
+        //    $(".button-text", this).text("Like");
+        //}
+        $.post("/Home/ChangeLikes", Like, function (data) {
             $("#cList li:not(:last)").remove();
             getComments();
-        });
-        if ($(".button-text", this).text() == "Like") {
-            $(".button-text", this).text("Unlike");
-        }
-        else {
-            $(".button-text", this).text("Like");
-        }
-        
+        });     
     });
 });
 
@@ -38,3 +37,16 @@ function getComments() {
         },
     });
 };
+
+function getHasLiked() {
+    $.ajax({
+        type: "GET",
+        contentType: "application/json; charset=utf8",
+        url: "/Home/GetHasLiked/",
+        data: "{}",
+        dataType: "json",
+        success: function (data) {
+            return data;
+        },
+    });
+}
