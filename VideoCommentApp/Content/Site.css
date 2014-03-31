@@ -64,8 +64,13 @@ textarea.has-error{
 .navbar-brand{
       color: #ffffff !important;
       font-weight: bold;
+      font-size:x-large;
 }
 
 .header{
     color: #428bca !important;
+}
+
+.btn-com {
+    margin-top:6px;
 }
