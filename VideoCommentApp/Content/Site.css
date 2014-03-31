@@ -55,3 +55,17 @@ textarea.has-error{
   -webkit-box-shadow: inset 0 1px 1px rgba(200, 0, 0, 0.175);
           box-shadow: inset 0 1px 1px rgba(200, 0, 0, 0.175);
 }
+
+.navbar{
+  background-color: #428bca !important;
+  border-color: #357ebd !important;
+}
+
+.navbar-brand{
+      color: #ffffff !important;
+      font-weight: bold;
+}
+
+.header{
+    color: #428bca !important;
+}
