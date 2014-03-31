@@ -59,14 +59,30 @@ namespace VideoCommentApp.Controllers
         [HttpGet]
         public ActionResult GetComments()
         {
+            String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            if (!String.IsNullOrEmpty(strUser))
+            {
+                int slashPos = strUser.IndexOf("\\");
+                if (slashPos != -1)
+                {
+                    strUser = strUser.Substring(slashPos + 1);
+                }
+            }
+            else
+            {
+                strUser = "Unknown user";
+            }
             var model = CommentRepository.Instance.GetComments();
-            var fiddledmodel = from c in model 
-                 select new { 
-                 CommentDate=c.CommentDate.ToShortDateString(), 
-                 ID = c.ID, 
-                 CommentText=c.CommentText, 
-                 Username=c.Username,
-                 Likes = c.Likes};
+            var fiddledmodel = from c in model
+                               select new
+                               {
+                                   CommentDate = c.CommentDate.ToShortDateString(),
+                                   ID = c.ID,
+                                   CommentText = c.CommentText,
+                                   Username = c.Username,
+                                   Likes = c.Likes,
+                                   LStatus = CommentRepository.Instance.HasLiked(strUser, c.ID)
+                               };
             return Json(fiddledmodel, JsonRequestBehavior.AllowGet);
         }
 

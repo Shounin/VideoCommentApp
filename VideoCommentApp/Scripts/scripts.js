@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     getComments();
     $("#btn-save").click(function () {
-        var Comment = { "ID": 1, "Username": "", "CommentText": $("#Comment").val(), "CommentDate": 0 }
+        var Comment = { "ID": 1, "Username": "", "CommentText": $("#Comment").val(), "CommentDate": 0, "LState": "Like" }
         $.post("/Home/Create", Comment, function (data) {
             $("#cList li:not(:last)").remove();
             $("#Comment").val("");
