@@ -3,11 +3,7 @@
 @{
     ViewBag.Title = "Like this video!";
 }
-
-<h2 class="header">Video blog application</h2>
-
-<iframe width="560" height="315" src="//www.youtube.com/embed/Kxp8qPEwSXM" frameborder="0" allowfullscreen></iframe>
-
+@* Templates *@
 <script type="text/html" id="template">
     <li class="list-group-item">
         <p>
@@ -31,15 +27,20 @@
         {"attribute": "content", "value": "Username"}'></span> likes this!
     </li>
 </script>
+@*Templates/*@
+<h2 class="header">King Agamemnon</h2>
+<div id=" width-box">
+    <div class="video-container"> @*Such responsive!*@
+        <iframe width="500" height="281" src="//www.youtube.com/embed/Kxp8qPEwSXM?feature=oembed" frameborder="0" allowfullscreen="" seamless></iframe>
+    </div>
+    <ul class="list-group" id="cList" style="max-width: 560px;">
 
-    
-<ul class="list-group" id="cList" style="max-width: 560px;">
-    <li class="list-group-item">
-        <form>
-            <label class="sr-only" for="CommentText">Comment</label>
-            <textarea class="form-control com-text" placeholder="Your comment goes here.." rows="3" id="Comment" name="Comment"></textarea>
-            @*<input type="text" id="Comment" name="comment" />*@
-            <input type="button" class="btn btn-primary btn-com" id="btn-save" value="Comment" />
-        </form>
-    </li>
-</ul>
+        <li class="list-group-item">
+            <form>
+                <label class="sr-only" for="CommentText">Comment</label>
+                <textarea class="form-control com-text" placeholder="Your comment goes here.." rows="3" id="Comment" name="Comment"></textarea>
+                <input type="button" class="btn btn-primary btn-com" id="btn-save" value="Comment" />
+            </form>
+        </li>
+    </ul>
+</div>
